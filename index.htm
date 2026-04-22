@@ -1043,27 +1043,30 @@
         }
 
         async function deleteRecord(id, name) {
-            if (!confirm(`ต้องการลบข้อมูลของ "${name}" ใช่หรือไม่?`)) {
+            if (!confirm(`🗑️ ต้องการลบข้อมูลของ "${name}" ใช่หรือไม่?\n\n⚠️ ข้อมูลที่ลบแล้วจะไม่สามารถกู้คืนได้`)) {
                 return;
             }
 
             document.getElementById('loading').style.display = 'flex';
             try {
                 const response = await fetch(`/api/delete/${id}`, {
-                    method: 'DELETE'
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
                 });
                 
                 const res = await response.json();
                 
                 if (res.success) {
-                    alert('ลบข้อมูลสำเร็จ');
-                    refreshData();
+                    alert('✅ ลบข้อมูลสำเร็จ!\n\nข้อมูลของ "' + name + '" ถูกลบออกจากระบบแล้ว');
+                    await refreshData();
                 } else {
                     throw new Error(res.error || 'ไม่สามารถลบข้อมูลได้');
                 }
             } catch (error) {
                 console.error('Delete error:', error);
-                alert('เกิดข้อผิดพลาดในการลบข้อมูล: ' + error.message);
+                alert('❌ เกิดข้อผิดพลาด!\n\n' + error.message);
             } finally {
                 document.getElementById('loading').style.display = 'none';
             }
