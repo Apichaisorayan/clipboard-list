@@ -77,6 +77,25 @@ app.post('/api/save', async (req, res) => {
     }
 });
 
+app.delete('/api/delete/:id', async (req, res) => {
+    try {
+        const id = parseInt(req.params.id);
+        const results = await loadResults();
+        
+        const filteredResults = results.filter(r => r.id !== id);
+        
+        if (filteredResults.length === results.length) {
+            return res.status(404).json({ success: false, error: 'Record not found' });
+        }
+        
+        await saveResults(filteredResults);
+        res.json({ success: true, message: 'Record deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting result:', error);
+        res.status(500).json({ success: false, error: 'Failed to delete result' });
+    }
+});
+
 if (process.env.NODE_ENV !== 'production') {
     app.listen(PORT, () => {
         console.log(`🚀 Server is running at http://localhost:${PORT}`);

@@ -977,8 +977,11 @@
                         <td style="color: var(--text-muted); font-size: 0.9rem;">${new Date(r.timestamp).toLocaleDateString('th-TH')}</td>
                         <td><span class="badge badge-success">${r.topGift}</span></td>
                         <td>
-                            <button class="btn btn-secondary" onclick='viewDetail(${JSON.stringify(r).replace(/'/g, "&apos;")})'>
+                            <button class="btn btn-secondary" onclick='viewDetail(${JSON.stringify(r).replace(/'/g, "&apos;")})' style="margin-right: 0.5rem;">
                                 <i data-lucide="eye" style="width: 18px;"></i> ดูผล
+                            </button>
+                            <button class="btn btn-secondary" onclick='deleteRecord(${r.id}, "${r.name}")' style="background: #fee2e2; color: #dc2626;">
+                                <i data-lucide="trash-2" style="width: 18px;"></i> ลบ
                             </button>
                         </td>
                     </tr>
@@ -1037,6 +1040,33 @@
                     <span style="color: var(--primary); font-weight: 700;">${g.score} คะแนน</span>
                 </div>
             `).join('');
+        }
+
+        async function deleteRecord(id, name) {
+            if (!confirm(`ต้องการลบข้อมูลของ "${name}" ใช่หรือไม่?`)) {
+                return;
+            }
+
+            document.getElementById('loading').style.display = 'flex';
+            try {
+                const response = await fetch(`/api/delete/${id}`, {
+                    method: 'DELETE'
+                });
+                
+                const res = await response.json();
+                
+                if (res.success) {
+                    alert('ลบข้อมูลสำเร็จ');
+                    refreshData();
+                } else {
+                    throw new Error(res.error || 'ไม่สามารถลบข้อมูลได้');
+                }
+            } catch (error) {
+                console.error('Delete error:', error);
+                alert('เกิดข้อผิดพลาดในการลบข้อมูล: ' + error.message);
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
         }
 
         async function saveAsImage() {
