@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบสำรวจของประทานฝ่ายวิญญาณ - Premium Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=K2D:wght@300;400;500;600;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- html2canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <style>
+        :root {
+            --primary: #075985; /* Deep Navy from logo text */
+            --primary-hover: #0369a1;
+            --accent: #fbbf24; /* Refined Gold for accents only */
+            --success: #10b981;
+            --background: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #f1f5f9;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --glow: 0 0 15px rgba(251, 191, 36, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'K2D', sans-serif;
+            background: var(--background);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .brand {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background: #0f172a; /* Solid Deep Navy */
+            color: white;
+            padding: 2.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            z-index: 100;
+        }
+
+        .brand {
+            font-size: 1.25rem;
+            margin-bottom: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.25rem;
+            color: white;
+            text-decoration: none;
+        }
+
+        .brand img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            padding: 2px;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 15px rgba(250, 204, 21, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(250, 204, 21, 0.8); }
+        }
+
+        .nav-menu {
+            list-style: none;
+            flex-grow: 1;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            color: #94a3b8;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+
+        .nav-link.active {
+            background: var(--primary);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex-grow: 1;
+            margin-left: 280px;
+            padding: 2.5rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Cards & Components */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .stat-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+        }
+
+        .stat-info h3 {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-info .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* Survey List */
+        .question-card {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.2s ease;
+        }
+
+        .question-card:last-child {
+            border-bottom: none;
+        }
+
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 1.25rem;
+            display: block;
+            font-size: 1.1rem;
+        }
+
+        .options {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            transition: all 0.2s ease;
+        }
+
+        .option:hover {
+            background: #f1f5f9;
+        }
+
+        .option input {
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        /* Result Styles */
+        .chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: var(--text-main);
+        }
+
+        /* Records Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 1rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            border-bottom: 2px solid var(--border);
+        }
+
+        td {
+            padding: 1.25rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-success { background: #dcfce7; color: #166534; }
+
+        /* Sections */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Loading Overlay */
+        #loading {
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1001;
+            background: white;
+            color: var(--primary);
+            border: none;
+            padding: 0.875rem;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .sidebar.mobile-open {
+            transform: translateX(0);
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Tablet Responsive */
+        @media (max-width: 1024px) {
+            .sidebar { 
+                width: 80px; 
+                padding: 1.5rem 1rem; 
+            }
+            .brand span, .nav-link span { 
+                display: none; 
+            }
+            .main-content { 
+                margin-left: 80px; 
+                padding: 2rem 1.5rem;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .sidebar {
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 280px;
+                transform: translateX(-100%);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 100;
+                box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+            }
+
+            .sidebar.mobile-open {
+                transform: translateX(0);
+            }
+
+            .brand span, .nav-link span {
+                display: block;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+                padding-top: 4.5rem;
+                background: var(--background);
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .header h1 {
+                font-size: 1.75rem;
+                background: linear-gradient(135deg, var(--primary), #0ea5e9);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .stat-card {
+                padding: 1.5rem;
+                border-radius: 16px;
+                background: linear-gradient(135deg, white, #f8fafc);
+                border: 1px solid rgba(7, 89, 133, 0.1);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+                transition: all 0.3s ease;
+            }
+
+            .stat-card:active {
+                transform: scale(0.98);
+            }
+
+            .stat-icon {
+                width: 52px;
+                height: 52px;
+                background: linear-gradient(135deg, var(--primary), #0ea5e9);
+                color: white;
+            }
+
+            .card {
+                padding: 1.5rem;
+                border-radius: 16px;
+                box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+                border: 1px solid rgba(7, 89, 133, 0.08);
+                margin-bottom: 1.5rem;
+            }
+
+            .question-card {
+                padding: 1.25rem;
+                background: #f8fafc;
+                border-radius: 12px;
+                margin-bottom: 1rem;
+                border: 1px solid #e2e8f0;
+            }
+
+            .question-card:last-child {
+                margin-bottom: 0;
+            }
+
+            .question-text {
+                font-size: 1rem;
+                line-height: 1.6;
+                color: var(--text-main);
+                font-weight: 500;
+            }
+
+            .options {
+                flex-direction: column;
+                gap: 0.75rem;
+                margin-top: 1rem;
+            }
+
+            .option {
+                width: 100%;
+                padding: 0.875rem 1rem;
+                border-radius: 10px;
+                border: 2px solid #e2e8f0;
+                background: white;
+                transition: all 0.2s ease;
+            }
+
+            .option:has(input:checked) {
+                border-color: var(--primary);
+                background: rgba(7, 89, 133, 0.05);
+            }
+
+            .option:active {
+                transform: scale(0.98);
+            }
+
+            table {
+                font-size: 0.875rem;
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            th, td {
+                padding: 0.875rem 0.75rem;
+            }
+
+            .btn {
+                padding: 0.875rem 1.5rem;
+                font-size: 1rem;
+                border-radius: 12px;
+                font-weight: 600;
+                box-shadow: 0 4px 12px rgba(7, 89, 133, 0.2);
+                transition: all 0.3s ease;
+            }
+
+            .btn:active {
+                transform: translateY(1px);
+                box-shadow: 0 2px 6px rgba(7, 89, 133, 0.2);
+            }
+
+            .btn-primary {
+                background: linear-gradient(135deg, var(--primary), #0369a1);
+            }
+
+            .chart-container {
+                height: 320px;
+                padding: 1rem 0;
+            }
+
+            input[type="text"] {
+                font-size: 16px !important;
+                padding: 1rem !important;
+                border-radius: 12px !important;
+                border: 2px solid #e2e8f0 !important;
+                transition: all 0.2s ease !important;
+            }
+
+            input[type="text"]:focus {
+                border-color: var(--primary) !important;
+                box-shadow: 0 0 0 3px rgba(7, 89, 133, 0.1) !important;
+            }
+        }
+
+        /* Small Mobile */
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 0.875rem;
+                padding-top: 4rem;
+            }
+
+            .mobile-menu-toggle {
+                padding: 0.75rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.125rem;
+                margin-bottom: 1rem;
+            }
+
+            .stat-card {
+                padding: 1.25rem;
+            }
+
+            .stat-icon {
+                width: 48px;
+                height: 48px;
+            }
+
+            .stat-info h3 {
+                font-size: 0.8rem;
+            }
+
+            .stat-info .value {
+                font-size: 1.5rem;
+            }
+
+            .card {
+                padding: 1.25rem;
+            }
+
+            .question-card {
+                padding: 1rem;
+            }
+
+            .question-text {
+                font-size: 0.95rem;
+            }
+
+            .option {
+                padding: 0.75rem 0.875rem;
+                font-size: 0.9rem;
+            }
+
+            table {
+                font-size: 0.8rem;
+            }
+
+            th, td {
+                padding: 0.75rem 0.5rem;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+                padding: 1rem 1.5rem;
+            }
+
+            .badge {
+                font-size: 0.7rem;
+                padding: 0.25rem 0.625rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loading">
+        <div class="stat-icon" style="animation: spin 1s linear infinite">
+            <i data-lucide="loader-2"></i>
+        </div>
+    </div>
+
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+        <i data-lucide="menu"></i>
+    </button>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <a href="#" class="brand">
+                <img src="img/logo.jpg" alt="Revival 3 Logo">
+                <span>Revival 3<br><small style="font-weight: 400; opacity: 0.8; font-size: 0.8rem;">Spiritual Gift Survey</small></span>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" data-target="dashboard">
+                        <i data-lucide="layout-dashboard"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-target="survey">
+                        <i data-lucide="clipboard-list"></i>
+                        <span>เริ่มทำแบบสำรวจ</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-target="records">
+                        <i data-lucide="users"></i>
+                        <span>รายชื่อผู้ทำเสร็จแล้ว</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section active">
+                <div class="header">
+                    <h1>Dashboard</h1>
+                    <div class="user-info">
+                        <span id="currentDate"></span>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i data-lucide="user-check"></i></div>
+                        <div class="stat-info">
+                            <h3>จำนวนผู้ทำทั้งหมด</h3>
+                            <div class="value" id="totalParticipants">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success)"><i data-lucide="calendar"></i></div>
+                        <div class="stat-info">
+                            <h3>คนล่าสุด</h3>
+                            <div class="value" id="latestParticipant">-</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>ยินดีต้อนรับ</h2>
+                    <p style="color: var(--text-muted); margin-top: 0.5rem;">คลิก "เริ่มทำแบบสำรวจ" เพื่อประเมินของประทานของคุณ หรือดูผลการประเมินจากเมนูด้านซ้าย</p>
+                    <button class="btn btn-primary" style="margin-top: 1.5rem;" onclick="showSection('survey')">
+                        เริ่มทำแบบสำรวจตอนนี้ <i data-lucide="arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Survey Section -->
+            <section id="survey" class="section">
+                <div class="header">
+                    <h1>เริ่มทำแบบสำรวจ</h1>
+                    <button class="btn btn-secondary" onclick="showSection('dashboard')">ยกเลิก</button>
+                </div>
+
+                <div class="card">
+                    <div class="input-group" style="margin-bottom: 2rem;">
+                        <label style="display: block; font-weight: 600; margin-bottom: 0.5rem;">ชื่อ-นามสกุล ของคุณ</label>
+                        <input type="text" id="userName" placeholder="กรุณากรอกชื่อของคุณ..." style="width: 100%; padding: 1rem; border-radius: 12px; border: 1px solid var(--border); font-size: 1rem; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border)'">
+                    </div>
+
+                    <div id="questionsContainer">
+                        <!-- Questions will be loaded here -->
+                    </div>
+
+                    <div style="margin-top: 2.5rem; text-align: center;">
+                        <button class="btn btn-primary btn-lg" style="padding: 1rem 3rem;" onclick="submitSurvey()">
+                            ส่งแบบสำรวจและประมวลผล <i data-lucide="send"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Records Section -->
+            <section id="records" class="section">
+                <div class="header">
+                    <h1>รายชื่อผู้ทำเสร็จแล้ว</h1>
+                </div>
+
+                <div class="card">
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ลำดับ</th>
+                                    <th>ชื่อ-นามสกุล</th>
+                                    <th>วันที่ทำ</th>
+                                    <th>ของประทานหลัก</th>
+                                    <th>การจัดการ</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recordsTableBody">
+                                <!-- Records will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Result Detail Section -->
+            <section id="resultDetail" class="section">
+                <div class="header">
+                    <h1 id="resultNameHeader">ผลคะแนนของประทาน</h1>
+                    <button class="btn btn-secondary" onclick="showSection('records')">กลับไปหน้าสรุป</button>
+                </div>
+
+                <div id="captureArea">
+                    <div class="card">
+                        <div class="chart-container">
+                            <canvas id="resultChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h2>อันดับของประทานที่โดดเด่น</h2>
+                        <div id="topGiftsList" style="margin-top: 1.5rem;">
+                            <!-- Top gifts will be listed here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1rem;">
+                    <button class="btn btn-primary" onclick="saveAsImage()">
+                        <i data-lucide="image"></i> บันทึกเป็นรูปภาพ
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Gifts mapping
+        const giftNames = [
+            "เผยพระวจนะ", "อภิบาล", "การสอน", "ถ้อยคำประกอบด้วยสติปัญญา", "ถ้อยคำประกอบด้วยความรู้",
+            "การตักเตือนและหนุนใจ", "การสังเกตวิญญาณ", "การบริจาค", "การปรนนิบัติ", "ความเมตตา",
+            "มิชชันนารี", "ผู้ประกาศ", "การรับรองแขก", "ความเชื่อ", "ผู้ครอบครอง",
+            "ผู้บริหาร", "การอัศจรรย์", "การรักษาโรค", "การพูดภาษาแปลก", "การแปลภาษาแปลก",
+            "อัครทูต", "การอยู่เป็นโสด", "การอธิษฐานอ้อนวอน", "การขับผี", "ผู้อุปการะ"
+        ];
+
+        let questions = [];
+        let resultsChart = null;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            lucide.createIcons();
+            document.getElementById('currentDate').innerText = new Date().toLocaleDateString('th-TH', { 
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+            });
+
+            // Load questions
+            try {
+                const response = await fetch('questions.json');
+                questions = await response.json();
+                renderQuestions();
+            } catch (error) {
+                console.error('Error loading questions:', error);
+            }
+
+            // Load records for dashboard
+            refreshData();
+
+            // Navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = link.getAttribute('data-target');
+                    showSection(target);
+                    
+                    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                    
+                    // Close mobile menu after clicking
+                    closeMobileMenu();
+                });
+            });
+
+            // Mobile menu toggle
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+            overlay.addEventListener('click', closeMobileMenu);
+
+            function toggleMobileMenu() {
+                sidebar.classList.toggle('mobile-open');
+                overlay.classList.toggle('active');
+            }
+
+            function closeMobileMenu() {
+                sidebar.classList.remove('mobile-open');
+                overlay.classList.remove('active');
+            }
+        });
+
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            
+            if (id === 'records') refreshData();
+        }
+
+        function renderQuestions() {
+            const container = document.getElementById('questionsContainer');
+            container.innerHTML = questions.map((q, i) => `
+                <div class="question-card">
+                    <span class="question-text">${i + 1}. ${q}</span>
+                    <div class="options">
+                        ${[3, 2, 1, 0].map(val => `
+                            <label class="option">
+                                <input type="radio" name="q${i + 1}" value="${val}" ${val === 0 ? 'checked' : ''}>
+                                <span>${getLabel(val)} (${val})</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getLabel(val) {
+            if (val === 3) return "มาก";
+            if (val === 2) return "บ้าง";
+            if (val === 1) return "น้อย";
+            return "ไม่มี";
+        }
+
+        async function submitSurvey() {
+            const name = document.getElementById('userName').value.trim();
+            if (!name) {
+                alert('กรุณากรอกชื่อของคุณก่อนส่งแบบสำรวจ');
+                document.getElementById('userName').focus();
+                return;
+            }
+
+            const answers = {};
+            for (let i = 1; i <= 125; i++) {
+                const checked = document.querySelector(`input[name="q${i}"]:checked`);
+                answers[i] = parseInt(checked.value);
+            }
+
+            // Calculate scores
+            const scores = new Array(25).fill(0);
+            for (let giftIdx = 0; giftIdx < 25; giftIdx++) {
+                // Questions for this gift: giftIdx+1, giftIdx+1+25, giftIdx+1+50, ...
+                for (let qIdx = giftIdx + 1; qIdx <= 125; qIdx += 25) {
+                    scores[giftIdx] += answers[qIdx];
+                }
+            }
+
+            const resultData = {
+                name: name,
+                scores: scores,
+                topGift: giftNames[scores.indexOf(Math.max(...scores))]
+            };
+
+            // Save to server
+            document.getElementById('loading').style.display = 'flex';
+            try {
+                console.log('Sending data to server...', resultData);
+                const response = await fetch('/api/save', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(resultData)
+                });
+                
+                if (!response.ok) throw new Error('Server returned error');
+                
+                const res = await response.json();
+                console.log('Server response:', res);
+
+                if (res.success) {
+                    // Success! Show result
+                    showResultDetail(resultData);
+                    // Scroll to top of result
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    throw new Error(res.error || 'Unknown error');
+                }
+            } catch (error) {
+                console.error('Submit error:', error);
+                alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล: ' + error.message);
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        async function refreshData() {
+            try {
+                const response = await fetch('/api/results');
+                const data = await response.json();
+                
+                // Update Dashboard
+                document.getElementById('totalParticipants').innerText = data.length;
+                document.getElementById('latestParticipant').innerText = data.length > 0 ? data[data.length-1].name : '-';
+
+                // Update Records Table
+                const tbody = document.getElementById('recordsTableBody');
+                tbody.innerHTML = data.reverse().map((r, i) => `
+                    <tr>
+                        <td>${data.length - i}</td>
+                        <td style="font-weight: 600;">${r.name}</td>
+                        <td style="color: var(--text-muted); font-size: 0.9rem;">${new Date(r.timestamp).toLocaleDateString('th-TH')}</td>
+                        <td><span class="badge badge-success">${r.topGift}</span></td>
+                        <td>
+                            <button class="btn btn-secondary" onclick='viewDetail(${JSON.stringify(r).replace(/'/g, "&apos;")})'>
+                                <i data-lucide="eye" style="width: 18px;"></i> ดูผล
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+                lucide.createIcons();
+            } catch (error) {
+                console.error('Error fetching results:', error);
+            }
+        }
+
+        function viewDetail(data) {
+            showResultDetail(data);
+        }
+
+        function showResultDetail(data) {
+            showSection('resultDetail');
+            document.getElementById('resultNameHeader').innerText = `ผลคะแนนของประทาน: ${data.name}`;
+            
+            // Render Chart
+            const ctx = document.getElementById('resultChart').getContext('2d');
+            if (resultsChart) resultsChart.destroy();
+            
+            resultsChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: giftNames,
+                    datasets: [{
+                        label: 'คะแนน (เต็ม 15)',
+                        data: data.scores,
+                        backgroundColor: 'rgba(7, 89, 133, 0.7)', /* var(--primary) with transparency */
+                        borderColor: '#075985',
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: { beginAtZero: true, max: 15 }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            // Top Gifts List
+            const sorted = data.scores.map((s, i) => ({ name: giftNames[i], score: s }))
+                .sort((a, b) => b.score - a.score);
+            
+            document.getElementById('topGiftsList').innerHTML = sorted.slice(0, 5).map((g, i) => `
+                <div style="display: flex; justify-content: space-between; padding: 1rem; background: ${i === 0 ? 'rgba(251, 191, 36, 0.1)' : 'white'}; border-radius: 12px; margin-bottom: 0.5rem; border: 1px solid ${i === 0 ? 'var(--accent)' : 'var(--border)'}; box-shadow: ${i === 0 ? 'var(--shadow)' : 'none'}">
+                    <span style="font-weight: 600;">${i+1}. ${g.name} ${i === 0 ? '👑' : ''}</span>
+                    <span style="color: var(--primary); font-weight: 700;">${g.score} คะแนน</span>
+                </div>
+            `).join('');
+        }
+
+        async function saveAsImage() {
+            const element = document.getElementById('captureArea');
+            document.getElementById('loading').style.display = 'flex';
+            try {
+                const canvas = await html2canvas(element, { scale: 2 });
+                const link = document.createElement('a');
+                link.download = `result-${Date.now()}.png`;
+                link.href = canvas.toDataURL();
+                link.click();
+            } catch (err) {
+                alert('ไม่สามารถสร้างรูปภาพได้');
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
