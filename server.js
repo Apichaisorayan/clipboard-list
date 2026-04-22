@@ -1,13 +1,30 @@
 const express = require('express');
-const fs = require('fs').promises;
+const { MongoClient } = require('mongodb');
 const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-const DATA_FILE = path.join(__dirname, 'results.json');
 
-// In-memory storage for Vercel (temporary)
-let memoryResults = [];
+// MongoDB connection
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017';
+const DB_NAME = 'spiritual-gift-survey';
+let db = null;
+
+async function connectDB() {
+    if (db) return db;
+    try {
+        const client = await MongoClient.connect(MONGODB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        db = client.db(DB_NAME);
+        console.log('✅ Connected to MongoDB');
+        return db;
+    } catch (error) {
+        console.error('❌ MongoDB connection error:', error);
+        throw error;
+    }
+}
 
 app.use(express.json());
 app.use(express.static(__dirname));
@@ -17,26 +34,25 @@ app.get('/', (req, res) => {
 });
 
 async function loadResults() {
-    // Try file system first (local dev)
-    if (process.env.NODE_ENV !== 'production') {
-        try {
-            const data = await fs.readFile(DATA_FILE, 'utf8');
-            return JSON.parse(data);
-        } catch (error) {
-            return [];
-        }
+    try {
+        const database = await connectDB();
+        const results = await database.collection('results').find({}).toArray();
+        return results;
+    } catch (error) {
+        console.error('Error loading results:', error);
+        return [];
     }
-    // Use in-memory for production (Vercel)
-    return memoryResults;
 }
 
-async function saveResults(results) {
-    // Save to file system (local dev)
-    if (process.env.NODE_ENV !== 'production') {
-        await fs.writeFile(DATA_FILE, JSON.stringify(results, null, 2), 'utf8');
+async function saveResult(result) {
+    try {
+        const database = await connectDB();
+        await database.collection('results').insertOne(result);
+        return true;
+    } catch (error) {
+        console.error('Error saving result:', error);
+        throw error;
     }
-    // Save to memory (Vercel)
-    memoryResults = results;
 }
 
 app.get('/api/results', async (req, res) => {
@@ -57,18 +73,14 @@ app.post('/api/save', async (req, res) => {
             return res.status(400).json({ success: false, error: 'Missing required fields' });
         }
 
-        const results = await loadResults();
-        
         const newResult = {
-            id: Date.now(),
             name,
             scores,
             topGift,
             timestamp: new Date().toISOString()
         };
         
-        results.push(newResult);
-        await saveResults(results);
+        await saveResult(newResult);
         
         res.json({ success: true, data: newResult });
     } catch (error) {
