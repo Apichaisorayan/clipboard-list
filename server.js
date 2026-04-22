@@ -12,17 +12,6 @@ let memoryResults = [];
 app.use(express.json());
 app.use(express.static(__dirname));
 
-// CORS headers
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-    if (req.method === 'OPTIONS') {
-        return res.sendStatus(200);
-    }
-    next();
-});
-
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.htm'));
 });
@@ -85,25 +74,6 @@ app.post('/api/save', async (req, res) => {
     } catch (error) {
         console.error('Error saving result:', error);
         res.status(500).json({ success: false, error: 'Failed to save result' });
-    }
-});
-
-app.delete('/api/delete/:id', async (req, res) => {
-    try {
-        const id = parseInt(req.params.id);
-        const results = await loadResults();
-        
-        const filteredResults = results.filter(r => r.id !== id);
-        
-        if (filteredResults.length === results.length) {
-            return res.status(404).json({ success: false, error: 'Record not found' });
-        }
-        
-        await saveResults(filteredResults);
-        res.json({ success: true, message: 'Record deleted successfully' });
-    } catch (error) {
-        console.error('Error deleting result:', error);
-        res.status(500).json({ success: false, error: 'Failed to delete result' });
     }
 });
 

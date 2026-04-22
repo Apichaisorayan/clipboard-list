@@ -977,11 +977,8 @@
                         <td style="color: var(--text-muted); font-size: 0.9rem;">${new Date(r.timestamp).toLocaleDateString('th-TH')}</td>
                         <td><span class="badge badge-success">${r.topGift}</span></td>
                         <td>
-                            <button class="btn btn-secondary" onclick='viewDetail(${JSON.stringify(r).replace(/'/g, "&apos;")})' style="margin-right: 0.5rem;">
+                            <button class="btn btn-secondary" onclick='viewDetail(${JSON.stringify(r).replace(/'/g, "&apos;")})'>
                                 <i data-lucide="eye" style="width: 18px;"></i> ดูผล
-                            </button>
-                            <button class="btn btn-secondary" onclick='deleteRecord(${r.id}, "${r.name}")' style="background: #fee2e2; color: #dc2626;">
-                                <i data-lucide="trash-2" style="width: 18px;"></i> ลบ
                             </button>
                         </td>
                     </tr>
@@ -1040,36 +1037,6 @@
                     <span style="color: var(--primary); font-weight: 700;">${g.score} คะแนน</span>
                 </div>
             `).join('');
-        }
-
-        async function deleteRecord(id, name) {
-            if (!confirm(`🗑️ ต้องการลบข้อมูลของ "${name}" ใช่หรือไม่?\n\n⚠️ ข้อมูลที่ลบแล้วจะไม่สามารถกู้คืนได้`)) {
-                return;
-            }
-
-            document.getElementById('loading').style.display = 'flex';
-            try {
-                const response = await fetch(`/api/delete/${id}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-                
-                const res = await response.json();
-                
-                if (res.success) {
-                    alert('✅ ลบข้อมูลสำเร็จ!\n\nข้อมูลของ "' + name + '" ถูกลบออกจากระบบแล้ว');
-                    await refreshData();
-                } else {
-                    throw new Error(res.error || 'ไม่สามารถลบข้อมูลได้');
-                }
-            } catch (error) {
-                console.error('Delete error:', error);
-                alert('❌ เกิดข้อผิดพลาด!\n\n' + error.message);
-            } finally {
-                document.getElementById('loading').style.display = 'none';
-            }
         }
 
         async function saveAsImage() {

@@ -29,11 +29,6 @@
       "methods": ["POST"]
     },
     {
-      "src": "/api/delete/(.*)",
-      "dest": "/server.js",
-      "methods": ["DELETE"]
-    },
-    {
       "src": "/questions.json",
       "dest": "/questions.json"
     },
