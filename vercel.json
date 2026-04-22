@@ -4,16 +4,45 @@
     {
       "src": "server.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "index.htm",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "questions.json",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "img/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "server.js"
+      "src": "/api/results",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/api/save",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/questions.json",
+      "dest": "/questions.json"
+    },
+    {
+      "src": "/img/(.*)",
+      "dest": "/img/$1"
+    },
+    {
+      "src": "/(.*\\.(css|js|jpg|jpeg|png|gif|svg|ico|json))",
+      "dest": "/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "server.js"
+      "dest": "/index.htm"
     }
   ]
 }
