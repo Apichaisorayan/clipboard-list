@@ -1,6 +1,8 @@
-node_modules/
-results.json
+# Cloudflare
+.wrangler/
+.dev.vars
+wrangler.toml.backup
+
+# System
 *.log
 .DS_Store
-.vercel
-.env

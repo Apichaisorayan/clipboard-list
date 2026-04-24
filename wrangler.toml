@@ -1,0 +1,9 @@
+name = "revival-survey"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "."
+
+# D1 Database binding
+[[d1_databases]]
+binding = "DB"
+database_name = "revival-survey-db"
+database_id = "6231c8a1-888f-4983-bc14-75559784fcef"

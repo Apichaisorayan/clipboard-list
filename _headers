@@ -1,0 +1,13 @@
+/*
+  Access-Control-Allow-Origin: *
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Cache-Control: public, max-age=3600
+
+/questions.json
+  Content-Type: application/json
+  Cache-Control: public, max-age=300
+
+/img/*
+  Cache-Control: public, max-age=86400
