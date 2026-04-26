@@ -7,3 +7,6 @@ pages_build_output_dir = "."
 binding = "DB"
 database_name = "revival-survey-db"
 database_id = "6231c8a1-888f-4983-bc14-75559784fcef"
+
+# Use remote database for development
+[env.production.d1_databases]

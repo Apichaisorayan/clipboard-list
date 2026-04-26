@@ -6,3 +6,7 @@ wrangler.toml.backup
 # System
 *.log
 .DS_Store
+
+# Node
+node_modules/
+package-lock.json

@@ -1,0 +1,26 @@
+{
+  "name": "full",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "wrangler pages dev .",
+    "start": "wrangler pages dev .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Apichaisorayan/clipboard-list.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Apichaisorayan/clipboard-list/issues"
+  },
+  "homepage": "https://github.com/Apichaisorayan/clipboard-list#readme",
+  "devDependencies": {
+    "wrangler": "^4.85.0"
+  }
+}
