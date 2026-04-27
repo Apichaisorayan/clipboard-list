@@ -459,12 +459,6 @@
                         <span>รายชื่อผู้ทำเสร็จ</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" data-target="categories">
-                        <i data-lucide="layers"></i>
-                        <span>จำแนกของประทาน</span>
-                    </a>
-                </li>
             </ul>
             <div
                 style="padding: 1.5rem; font-size: 0.75rem; color: #64748b; border-top: 1px solid #1e293b;">
@@ -507,6 +501,149 @@
                     <button class="btn btn-primary" onclick="showSection('survey')">
                         เริ่มทำแบบสำรวจ <i data-lucide="arrow-right"></i>
                     </button>
+                </div>
+
+                <div class="card" style="margin-bottom: 2rem;">
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-muted);">
+                        ของประทานฝ่ายวิญญาณแบ่งออกเป็น <strong>3 หมวดหมู่หลัก</strong> ตามพระคัมภีร์ 
+                        แต่ละหมวดมีจุดประสงค์และลักษณะการใช้งานที่แตกต่างกัน แต่ทั้งหมดมาจาก<strong>พระวิญญาณองค์เดียวกัน</strong>
+                        เพื่อสร้างพระกายของพระคริสต์ให้เข้มแข็ง
+                    </p>
+                </div>
+
+                <!-- 3 Categories Grid -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                    <!-- Category 1: Equipping Gifts -->
+                    <div class="card">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #075985, #0369a1); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <i data-lucide="crown" style="color: white; width: 24px; height: 24px;"></i>
+                            </div>
+                            <div>
+                                <h2 class="card-title" style="margin: 0;">1. ของประทานแห่งการแต่งตั้ง</h2>
+                                <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">Equipping Gifts (เอเฟซัส 4:11)</p>
+                            </div>
+                        </div>
+                    
+                        <div style="display: grid; gap: 1rem;">
+                            <div style="padding: 1rem; background: var(--slate-50); border-radius: 8px; border-left: 4px solid var(--primary);">
+                                <strong>อัครทูต (Apostles)</strong>
+                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">ก่อตั้งคริสตจักร วางรากฐานความเชื่อ</p>
+                            </div>
+                            <div style="padding: 1rem; background: var(--slate-50); border-radius: 8px; border-left: 4px solid var(--primary);">
+                                <strong>ผู้เผยพระวจนะ (Prophets)</strong>
+                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">ประกาศสารจากพระเจ้า เตือนสติคริสตจักร</p>
+                            </div>
+                            <div style="padding: 1rem; background: var(--slate-50); border-radius: 8px; border-left: 4px solid var(--primary);">
+                                <strong>ผู้เผยแพร่ข่าวประเสริฐ (Evangelists)</strong>
+                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">นำคนมาหาพระคริสต์ ประกาศข่าวดี</p>
+                            </div>
+                            <div style="padding: 1rem; background: var(--slate-50); border-radius: 8px; border-left: 4px solid var(--primary);">
+                                <strong>ศิษยาภิบาล (Pastors)</strong>
+                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">ดูแลเลี้ยงดูคริสตจักร ปกป้องฝูงแกะ</p>
+                            </div>
+                            <div style="padding: 1rem; background: var(--slate-50); border-radius: 8px; border-left: 4px solid var(--primary);">
+                                <strong>อาจารย์ (Teachers)</strong>
+                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">สอนพระวจนะอย่างถูกต้องชัดเจน</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category 2: Serving Gifts -->
+                    <div class="card">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <i data-lucide="heart" style="color: white; width: 24px; height: 24px;"></i>
+                            </div>
+                            <div>
+                                <h2 class="card-title" style="margin: 0;">2. ของประทานแห่งการปรนนิบัติ</h2>
+                                <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">Serving/Ministry Gifts (โรม 12:6-8)</p>
+                            </div>
+                        </div>
+                    
+                        <div style="display: grid; gap: 1rem;">
+                            <div style="padding: 1rem; background: var(--slate-50); border-radius: 8px; border-left: 4px solid #10b981;">
+                                <strong>การเผยพระวจนะ (Prophecy)</strong>
+                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">พูดความจริงจากพระเจ้า ตามกำลังความเชื่อ</p>
+                            </div>
+                            <div style="padding: 1rem; background: var(--slate-50); border-radius: 8px; border-left: 4px solid #10b981;">
+                                <strong>การปรนนิบัติ (Service)</strong>
+                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">รับใช้คนอื่นด้วยใจจริง อย่างต่อเนื่อง</p>
+                            </div>
+                            <div style="padding: 1rem; background: var(--slate-50); border-radius: 8px; border-left: 4px solid #10b981;">
+                                <strong>การสั่งสอน (Teaching)</strong>
+                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">อธิบายพระวจนะให้เข้าใจ ทุ่มเทให้การสอน</p>
+                            </div>
+                            <div style="padding:  1rem; background: var(--slate-50); border-radius: 8px; border-left: 4px solid #10b981;">
+                                <strong>การเตือนสติ (Exhortation)</strong>
+                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">หนุนใจ กระตุ้น ชี้แนะอย่างสม่ำเสมอ</p>
+                            </div>
+                            <div style="padding: 1rem; background: var(--slate-50); border-radius: 8px; border-left: 4px solid #10b981;">
+                                <strong>การบริจาค (Giving)</strong>
+                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">ให้ด้วยใจกว้างขวาง ไม่หวังสิ่งตอบแทน</p>
+                            </div>
+                            <div style="padding: 1rem; background: var(--slate-50); border-radius: 8px; border-left: 4px solid #10b981;">
+                                <strong>การครอบครอง (Leadership)</strong>
+                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">นำด้วยความรับผิดชอบ เอาใจใส่ขยัน</p>
+                            </div>
+                            <div style="padding: 1rem; background: var(--slate-50); border-radius: 8px; border-left: 4px solid #10b981;">
+                                <strong>การแสดงความเมตตา (Mercy)</strong>
+                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">ช่วยเหลือด้วยความรัก ด้วยใจยินดี</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category 3: Manifestation Gifts -->
+                    <div class="card">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #fbbf24, #f59e0b); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <i data-lucide="zap" style="color: white; width: 24px; height: 24px;"></i>
+                            </div>
+                            <div>
+                                <h2 class="card-title" style="margin: 0;">3. ของประทานแห่งการสำแดง</h2>
+                                <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">Manifestation Gifts (1 โครินธ์ 12:8-11)</p>
+                            </div>
+                        </div>
+                  
+                        <div style="display: grid; gap: 1rem;">
+                            <div style="padding: 1rem; background: var(--slate-50); border-radius: 8px; border-left: 4px solid #fbbf24;">
+                                <strong>ถ้อยคำแห่งสติปัญญา (Word of Wisdom)</strong>
+                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">ปัญญาจากพระเจ้าในการตัดสินใจ</p>
+                            </div>
+                            <div style="padding: 1rem; background: var(--slate-50); border-radius: 8px; border-left: 4px solid #fbbf24;">
+                                <strong>ถ้อยคำแห่งความรู้ (Word of Knowledge)</strong>
+                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">รู้ข้อมูลที่ไม่เคยเรียนรู้มาก่อน</p>
+                            </div>
+                            <div style="padding: 1rem; background: var(--slate-50); border-radius: 8px; border-left: 4px solid #fbbf24;">
+                                <strong>ความเชื่อ (Faith)</strong>
+                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">เชื่อเหนือธรรมชาติ เชื่อในสิ่งที่พระเจ้าจะทำ</p>
+                            </div>
+                            <div style="padding: 1rem; background: var(--slate-50); border-radius: 8px; border-left: 4px solid #fbbf24;">
+                                <strong>รักษาโรค (Gifts of Healing)</strong>
+                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">รักษาคนป่วยโดยฤทธิ์พระเจ้า</p>
+                            </div>
+                            <div style="padding: 1rem; background: var(--slate-50); border-radius: 8px; border-left: 4px solid #fbbf24;">
+                                <strong>ทำอิทธิฤทธิ์ (Working of Miracles)</strong>
+                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">ทำสิ่งพิศวงที่ท้าทายกฎธรรมชาติ</p>
+                            </div>
+                            <div style="padding: 1rem; background: var(--slate-50); border-radius: 8px; border-left: 4px solid #fbbf24;">
+                                <strong>เผยพระวจนะ (Prophecy)</strong>
+                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">พูดสารจากพระเจ้าในเวลานั้น</p>
+                            </div>
+                            <div style="padding: 1rem; background: var(--slate-50); border-radius: 8px; border-left: 4px solid #fbbf24;">
+                                <strong>สังเกตวิญญาณ (Discerning of Spirits)</strong>
+                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">แยกแยะวิญญาณบริสุทธิ์ มนุษย์ หรือชั่ว</p>
+                            </div>
+                            <div style="padding: 1rem; background: var(--slate-50); border-radius: 8px; border-left: 4px solid #fbbf24;">
+                                <strong>พูดภาษาแปลก (Speaking in Tongues)</strong>
+                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">พูดภาษาที่ไม่เคยเรียนรู้มา</p>
+                            </div>
+                            <div style="padding: 1rem; background: var(--slate-50); border-radius: 8px; border-left: 4px solid #fbbf24;">
+                                <strong>แปลภาษา (Interpretation of Tongues)</strong>
+                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">แปลภาษาแปลกให้คนอื่นเข้าใจ</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -562,156 +699,6 @@
                 </div>
             </section>
 
-            <!-- Categories -->
-            <section id="categories" class="section">
-                <div class="page-header">
-                    <h1>การจำแนกของประทานฝ่ายวิญญาณ</h1>
-                </div>
-
-                <div class="card" style="margin-bottom: 2rem;">
-                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-muted);">
-                        ของประทานฝ่ายวิญญาณแบ่งออกเป็น <strong>3 หมวดหมู่หลัก</strong> ตามพระคัมภีร์ 
-                        แต่ละหมวดมีจุดประสงค์และลักษณะการใช้งานที่แตกต่างกัน แต่ทั้งหมดมาจาก<strong>พระวิญญาณองค์เดียวกัน</strong>
-                        เพื่อสร้างพระกายของพระคริสต์ให้เข้มแข็ง
-                    </p>
-                </div>
-
-                <!-- 3 Categories Grid -->
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
-                    <!-- Category 1: Equipping Gifts -->
-                    <div class="card">
-                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                            <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #075985, #0369a1); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                                <i data-lucide="crown" style="color: white; width: 24px; height: 24px;"></i>
-                            </div>
-                            <div>
-                                <h2 class="card-title" style="margin: 0;">1. ของประทานแห่งการแต่งตั้ง</h2>
-                                <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">Equipping Gifts (เอเฟซัส 4:11)</p>
-                            </div>
-                        </div>
-                    
-                        <div style="display: grid; gap: 1rem;">
-                        <div style="padding: 1rem; background: var(--background); border-radius: 8px; border-left: 4px solid var(--primary);">
-                            <strong>อัครทูต (Apostles)</strong>
-                            <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">ก่อตั้งคริสตจักร วางรากฐานความเชื่อ</p>
-                        </div>
-                        <div style="padding: 1rem; background: var(--background); border-radius: 8px; border-left: 4px solid var(--primary);">
-                            <strong>ผู้เผยพระวจนะ (Prophets)</strong>
-                            <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">ประกาศสารจากพระเจ้า เตือนสติคริสตจักร</p>
-                        </div>
-                        <div style="padding: 1rem; background: var(--background); border-radius: 8px; border-left: 4px solid var(--primary);">
-                            <strong>ผู้เผยแพร่ข่าวประเสริฐ (Evangelists)</strong>
-                            <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">นำคนมาหาพระคริสต์ ประกาศข่าวดี</p>
-                        </div>
-                        <div style="padding: 1rem; background: var(--background); border-radius: 8px; border-left: 4px solid var(--primary);">
-                            <strong>ศิษยาภิบาล (Pastors)</strong>
-                            <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">ดูแลเลี้ยงดูคริสตจักร ปกป้องฝูงแกะ</p>
-                        </div>
-                        <div style="padding: 1rem; background: var(--background); border-radius: 8px; border-left: 4px solid var(--primary);">
-                            <strong>อาจารย์ (Teachers)</strong>
-                            <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">สอนพระวจนะอย่างถูกต้องชัดเจน</p>
-                        </div>
-                    </div>
-                </div>
-
-                    <!-- Category 2: Serving Gifts -->
-                    <div class="card">
-                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                            <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                                <i data-lucide="heart" style="color: white; width: 24px; height: 24px;"></i>
-                            </div>
-                            <div>
-                                <h2 class="card-title" style="margin: 0;">2. ของประทานแห่งการปรนนิบัติ</h2>
-                                <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">Serving/Ministry Gifts (โรม 12:6-8)</p>
-                            </div>
-                        </div>
-                    
-                        <div style="display: grid; gap: 1rem;">
-                            <div style="padding: 1rem; background: var(--background); border-radius: 8px; border-left: 4px solid var(--success);">
-                                <strong>การเผยพระวจนะ (Prophecy)</strong>
-                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">พูดความจริงจากพระเจ้า ตามกำลังความเชื่อ</p>
-                            </div>
-                            <div style="padding: 1rem; background: var(--background); border-radius: 8px; border-left: 4px solid var(--success);">
-                                <strong>การปรนนิบัติ (Service)</strong>
-                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">รับใช้คนอื่นด้วยใจจริง อย่างต่อเนื่อง</p>
-                            </div>
-                            <div style="padding: 1rem; background: var(--background); border-radius: 8px; border-left: 4px solid var(--success);">
-                                <strong>การสั่งสอน (Teaching)</strong>
-                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">อธิบายพระวจนะให้เข้าใจ ทุ่มเทให้การสอน</p>
-                            </div>
-                            <div style="padding:  1rem; background: var(--background); border-radius: 8px; border-left: 4px solid var(--success);">
-                                <strong>การเตือนสติ (Exhortation)</strong>
-                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">หนุนใจ กระตุ้น ชี้แนะอย่างสม่ำเสมอ</p>
-                            </div>
-                            <div style="padding: 1rem; background: var(--background); border-radius: 8px; border-left: 4px solid var(--success);">
-                                <strong>การบริจาค (Giving)</strong>
-                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">ให้ด้วยใจกว้างขวาง ไม่หวังสิ่งตอบแทน</p>
-                            </div>
-                            <div style="padding: 1rem; background: var(--background); border-radius: 8px; border-left: 4px solid var(--success);">
-                                <strong>การครอบครอง (Leadership)</strong>
-                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">นำด้วยความรับผิดชอบ เอาใจใส่ขยัน</p>
-                            </div>
-                            <div style="padding: 1rem; background: var(--background); border-radius: 8px; border-left: 4px solid var(--success);">
-                                <strong>การแสดงความเมตตา (Mercy)</strong>
-                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">ช่วยเหลือด้วยความรัก ด้วยใจยินดี</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Category 3: Manifestation Gifts -->
-                    <div class="card">
-                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                            <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #fbbf24, #f59e0b); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                                <i data-lucide="zap" style="color: white; width: 24px; height: 24px;"></i>
-                            </div>
-                            <div>
-                                <h2 class="card-title" style="margin: 0;">3. ของประทานแห่งการสำแดงของพระวิญญาณ</h2>
-                                <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">Manifestation Gifts (1 โครินธ์ 12:8-11)</p>
-                            </div>
-                        </div>
-                  
-                        <div style="display: grid; gap: 1rem;">
-                            <div style="padding: 1rem; background: var(--background); border-radius: 8px; border-left: 4px solid var(--accent);">
-                                <strong>ถ้อยคำแห่งสติปัญญา (Word of Wisdom)</strong>
-                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">ปัญญาจากพระเจ้าในการตัดสินใจ</p>
-                            </div>
-                            <div style="padding: 1rem; background: var(--background); border-radius: 8px; border-left: 4px solid var(--accent);">
-                                <strong>ถ้อยคำแห่งความรู้ (Word of Knowledge)</strong>
-                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">รู้ข้อมูลที่ไม่เคยเรียนรู้มาก่อน</p>
-                            </div>
-                            <div style="padding: 1rem; background: var(--background); border-radius: 8px; border-left: 4px solid var(--accent);">
-                                <strong>ความเชื่อ (Faith)</strong>
-                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">เชื่อเหนือธรรมชาติ เชื่อในสิ่งที่พระเจ้าจะทำ</p>
-                            </div>
-                            <div style="padding: 1rem; background: var(--background); border-radius: 8px; border-left: 4px solid var(--accent);">
-                                <strong>รักษาโรค (Gifts of Healing)</strong>
-                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">รักษาคนป่วยโดยฤทธิ์พระเจ้า</p>
-                            </div>
-                            <div style="padding: 1rem; background: var(--background); border-radius: 8px; border-left: 4px solid var(--accent);">
-                                <strong>ทำอิทธิฤทธิ์ (Working of Miracles)</strong>
-                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">ทำสิ่งพิศวงที่ท้าทายกฎธรรมชาติ</p>
-                            </div>
-                            <div style="padding: 1rem; background: var(--background); border-radius: 8px; border-left: 4px solid var(--accent);">
-                                <strong>เผยพระวจนะ (Prophecy)</strong>
-                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">พูดสารจากพระเจ้าในเวลานั้น</p>
-                            </div>
-                            <div style="padding: 1rem; background: var(--background); border-radius: 8px; border-left: 4px solid var(--accent);">
-                                <strong>สังเกตวิญญาณ (Discerning of Spirits)</strong>
-                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">แยกแยะวิญญาณบริสุทธิ์ มนุษย์ หรือชั่ว</p>
-                            </div>
-                            <div style="padding: 1rem; background: var(--background); border-radius: 8px; border-left: 4px solid var(--accent);">
-                                <strong>พูดภาษาแปลก (Speaking in Tongues)</strong>
-                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">พูดภาษาที่ไม่เคยเรียนรู้มา</p>
-                            </div>
-                            <div style="padding: 1rem; background: var(--background); border-radius: 8px; border-left: 4px solid var(--accent);">
-                                <strong>แปลภาษา (Interpretation of Tongues)</strong>
-                                <p style="margin: 0.5rem 0 0 0; color: var(--text-muted);">แปลภาษาแปลกให้คนอื่นเข้าใจ</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </section>
 
             <!-- Result Detail -->
             <section id="resultDetail" class="section">
@@ -891,10 +878,10 @@
                 const res = await fetch('/api/results');
                 const data = await res.json();
                 document.getElementById('totalParticipants').innerText = data.length;
-                document.getElementById('latestParticipant').innerText = data.length > 0 ? data[data.length - 1].name : '-';
+                document.getElementById('latestParticipant').innerText = data.length > 0 ? data[0].name : '-';
 
                 const tbody = document.getElementById('recordsTableBody');
-                tbody.innerHTML = data.reverse().map((r, i) => `
+                tbody.innerHTML = data.map((r, i) => `
                     <tr>
                         <td>${data.length - i}</td>
                         <td><strong>${r.name}</strong></td>

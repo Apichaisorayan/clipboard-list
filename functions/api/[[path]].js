@@ -27,6 +27,7 @@ export async function onRequest(context) {
             const parsedResults = results.map(r => ({
                 ...r,
                 scores: JSON.parse(r.scores),
+                topGift: r.top_gift,
                 timestamp: r.timestamp
             }));
 
